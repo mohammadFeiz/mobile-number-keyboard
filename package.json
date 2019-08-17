@@ -1,0 +1,20 @@
+{
+  "name": "mobile-number-keyboard",
+  "version": "1.0.2",
+  "description": "mobile number keyboard use in mobile js frameworks like cordova and phonegap. <br/>\r see this demo on stackblitz for undrestand how it work. <br/>\r <a href=\"https://stackblitz.com/edit/mobile-number-keyboard?file=index.js\"></a>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mohammadFeiz/mobile-number-keyboard.git"
+  },
+  "keywords": ["mobile","keyboard","mobile keyboard","mobile number keyboard","js mobile keyboad","js keyboard"],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mohammadFeiz/mobile-number-keyboard/issues"
+  },
+  "homepage": "https://github.com/mohammadFeiz/mobile-number-keyboard#readme"
+}
