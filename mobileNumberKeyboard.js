@@ -13,7 +13,9 @@ var _jquery = _interopRequireDefault(require("jquery"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; if (obj != null) { var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _instanceof(left, right) { if (right != null && typeof Symbol !== "undefined" && right[Symbol.hasInstance]) { return !!right[Symbol.hasInstance](left); } else { return left instanceof right; } }
 
@@ -52,7 +54,6 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(MobileNumberKeyboard).call(this, props));
     var _this$props = _this.props,
         theme = _this$props.theme,
-        fields = _this$props.fields,
         _this$props$minus = _this$props.minus,
         minus = _this$props$minus === void 0 ? true : _this$props$minus,
         _this$props$float = _this$props.float,
@@ -61,7 +62,6 @@ function (_Component) {
     _this.state = {
       caps: false,
       init: true,
-      fields: fields,
       isMobile: 'ontouchstart' in document.documentElement ? true : false,
       row1: {
         index: '1',
@@ -144,8 +144,9 @@ function (_Component) {
   }, {
     key: "ok",
     value: function ok() {
-      var close = this.props.close;
-      var fields = this.state.fields;
+      var _this$props2 = this.props,
+          close = _this$props2.close,
+          fields = _this$props2.fields;
 
       if (this.props.callback) {
         var obj = {};
@@ -182,9 +183,7 @@ function (_Component) {
         return;
       }
 
-      var _this$state = this.state,
-          init = _this$state.init,
-          fields = _this$state.fields;
+      var init = this.state.init;
       var activeField = this.getActiveField();
       var value = (activeField.value || '0').toString();
 
@@ -195,9 +194,7 @@ function (_Component) {
           activeField.value = '-' + value;
         }
 
-        this.setState({
-          fields: fields
-        });
+        this.setState({});
         return;
       }
 
@@ -207,7 +204,7 @@ function (_Component) {
       }
 
       var pointIndex = value.indexOf('.');
-      var length = value.length;
+      var length = value.length; //var lastChar = length > 0?value[length - 1]:false;
 
       if (id === 'key-back') {
         if (length > 0) {
@@ -246,14 +243,13 @@ function (_Component) {
       }
 
       this.setState({
-        fields: fields,
         init: false
       });
     }
   }, {
     key: "getActiveField",
     value: function getActiveField() {
-      var fields = this.state.fields;
+      var fields = this.props.fields;
 
       for (var i = 0; i < fields.length; i++) {
         if (fields[i].active) {
@@ -311,31 +307,27 @@ function (_Component) {
   }, {
     key: "fieldMouseDown",
     value: function fieldMouseDown(index) {
-      var fields = this.state.fields;
+      var init = this.state.init;
+      var fields = this.props.fields;
 
       for (var i = 0; i < fields.length; i++) {
         var field = fields[i];
 
         if (i === index) {
           if (field.active) {
-            this.setState({
-              init: !this.state.init,
-              fields: fields
-            });
+            init = !init;
           } else {
+            init = true;
             field.active = true;
-            this.setState({
-              init: true,
-              fields: fields
-            });
           }
         } else {
           field.active = false;
-          this.setState({
-            fields: fields
-          });
         }
       }
+
+      this.setState({
+        init: init
+      });
     }
   }, {
     key: "getTheme",
@@ -355,26 +347,27 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this$state2 = this.state,
-          caps = _this$state2.caps,
-          value = _this$state2.value,
-          sym = _this$state2.sym,
-          init = _this$state2.init,
-          isMobile = _this$state2.isMobile;
-      var open = this.props.open;
-      var fields = this.state.fields;
+      var _this$state = this.state,
+          caps = _this$state.caps,
+          value = _this$state.value,
+          sym = _this$state.sym,
+          init = _this$state.init,
+          isMobile = _this$state.isMobile;
+      var _this$props3 = this.props,
+          open = _this$props3.open,
+          fields = _this$props3.fields;
 
       if (!open) {
         return '';
       }
 
-      var _this$props2 = this.props,
-          _this$props2$title = _this$props2.title,
-          title = _this$props2$title === void 0 ? '' : _this$props2$title,
-          _this$props2$keyHeigh = _this$props2.keyHeight,
-          keyHeight = _this$props2$keyHeigh === void 0 ? 36 : _this$props2$keyHeigh,
-          _this$props2$gap = _this$props2.gap,
-          gap = _this$props2$gap === void 0 ? 2 : _this$props2$gap;
+      var _this$props4 = this.props,
+          _this$props4$title = _this$props4.title,
+          title = _this$props4$title === void 0 ? '' : _this$props4$title,
+          _this$props4$keyHeigh = _this$props4.keyHeight,
+          keyHeight = _this$props4$keyHeigh === void 0 ? 36 : _this$props4$keyHeigh,
+          _this$props4$gap = _this$props4.gap,
+          gap = _this$props4$gap === void 0 ? 2 : _this$props4$gap;
       var contextValue = {
         caps: caps,
         sym: sym,
@@ -386,6 +379,7 @@ function (_Component) {
         title: title,
         keyHeight: keyHeight,
         gap: gap,
+        fields: fields,
         fieldMouseDown: this.fieldMouseDown.bind(this),
         isMobile: isMobile
       };
@@ -397,9 +391,7 @@ function (_Component) {
       var Fields = fields.map(function (field, i) {
         return _react.default.createElement(KeyboardField, {
           key: i,
-          index: i,
-          fields: fields,
-          field: field
+          index: i
         });
       });
       return _react.default.createElement(keyBoardNumberContext.Provider, {
@@ -423,6 +415,9 @@ function (_Component) {
 }(_react.Component);
 
 exports.default = MobileNumberKeyboard;
+MobileNumberKeyboard.defaultProps = {
+  fields: []
+};
 
 var KeyboardRow =
 /*#__PURE__*/
@@ -518,9 +513,9 @@ function (_Component3) {
   }, {
     key: "render",
     value: function render() {
-      var _this$props3 = this.props,
-          item = _this$props3.item,
-          style = _this$props3.style;
+      var _this$props5 = this.props,
+          item = _this$props5.item,
+          style = _this$props5.style;
       var _this$context3 = this.context,
           keyclick = _this$context3.keyclick,
           isMobile = _this$context3.isMobile,
@@ -688,13 +683,12 @@ function (_Component6) {
   }, {
     key: "render",
     value: function render() {
-      var _this$props4 = this.props,
-          fields = _this$props4.fields,
-          index = _this$props4.index;
+      var index = this.props.index;
       var _this$context6 = this.context,
           fieldMouseDown = _this$context6.fieldMouseDown,
           theme = _this$context6.theme,
-          init = _this$context6.init;
+          init = _this$context6.init,
+          fields = _this$context6.fields;
       var highlight = theme.highlight;
       var field = fields[index];
       return _react.default.createElement("div", {

@@ -1,0 +1,17 @@
+{
+  "name": "@mohamadfeiz/mobile-number-keyboard",
+  "version": "1.0.1",
+  "description": "mobile number keyboard based on javascript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["keyboard","android","js keyboard","js","number"],
+  "author": "mohamad sharif feiz",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mohammadFeiz/mobile-number-keyboard.git"
+  }
+}
+
