@@ -1,6 +1,6 @@
 {
   "name": "mobile-number-keyboard",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "mobile number keyboard use in mobile js frameworks like cordova and phonegap. <br/>\r see this demo on stackblitz for undrestand how it work. <br/>\r <a href=\"https://stackblitz.com/edit/mobile-number-keyboard?file=index.js\"></a>",
   "main": "index.js",
   "scripts": {
