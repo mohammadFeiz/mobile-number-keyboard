@@ -424,17 +424,16 @@ var KeyboardRow =
 function (_Component2) {
   _inherits(KeyboardRow, _Component2);
 
-  function KeyboardRow(props) {
+  function KeyboardRow() {
     _classCallCheck(this, KeyboardRow);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(KeyboardRow).call(this, props));
+    return _possibleConstructorReturn(this, _getPrototypeOf(KeyboardRow).apply(this, arguments));
   }
 
   _createClass(KeyboardRow, [{
     key: "render",
     value: function render() {
       var row = this.props.row;
-      var gap = this.context.gap;
       var keys = row.items.map(function (item, i) {
         return _react.default.createElement(KeyboardKey, {
           key: row.index + i,
@@ -457,10 +456,10 @@ var KeyboardKey =
 function (_Component3) {
   _inherits(KeyboardKey, _Component3);
 
-  function KeyboardKey(props) {
+  function KeyboardKey() {
     _classCallCheck(this, KeyboardKey);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(KeyboardKey).call(this, props));
+    return _possibleConstructorReturn(this, _getPrototypeOf(KeyboardKey).apply(this, arguments));
   }
 
   _createClass(KeyboardKey, [{
@@ -487,11 +486,7 @@ function (_Component3) {
     value: function getStyle(style) {
       var _this$context2 = this.context,
           keyHeight = _this$context2.keyHeight,
-          theme = _this$context2.theme,
           gap = _this$context2.gap;
-      var keyBackground = theme.keyBackground,
-          keyColor = theme.keyColor,
-          keyBoxShadow = theme.keyBoxShadow;
       var item = this.props.item;
       return _jquery.default.extend({}, {
         height: keyHeight + 'px',
@@ -505,9 +500,7 @@ function (_Component3) {
   }, {
     key: "getKeyStyle",
     value: function getKeyStyle(mode) {
-      var _this$context3 = this.context,
-          keyHeight = _this$context3.keyHeight,
-          theme = _this$context3.theme;
+      var theme = this.context.theme;
       var keyBackground = theme.keyBackground,
           keyColor = theme.keyColor,
           keyBoxShadow = theme.keyBoxShadow;
@@ -555,22 +548,20 @@ var KeyboardHeader =
 function (_Component4) {
   _inherits(KeyboardHeader, _Component4);
 
-  function KeyboardHeader(props) {
+  function KeyboardHeader() {
     _classCallCheck(this, KeyboardHeader);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(KeyboardHeader).call(this, props));
+    return _possibleConstructorReturn(this, _getPrototypeOf(KeyboardHeader).apply(this, arguments));
   }
 
   _createClass(KeyboardHeader, [{
     key: "getLCDStyle",
     value: function getLCDStyle() {
-      var _this$context5 = this.context,
-          theme = _this$context5.theme,
-          keyHeight = _this$context5.keyHeight,
-          gap = _this$context5.gap,
-          init = _this$context5.init;
-      var lcdBackground = theme.lcdBackground,
-          lcdColor = theme.lcdColor;
+      var _this$context4 = this.context,
+          theme = _this$context4.theme,
+          keyHeight = _this$context4.keyHeight,
+          gap = _this$context4.gap;
+      var lcdBackground = theme.lcdBackground;
       return {
         background: lcdBackground,
         minHeight: keyHeight - 2 * gap + 'px',
@@ -584,27 +575,7 @@ function (_Component4) {
   }, {
     key: "render",
     value: function render() {
-      var _this$context6 = this.context,
-          value = _this$context6.value,
-          gap = _this$context6.gap,
-          init = _this$context6.init,
-          lcdMouseDown = _this$context6.lcdMouseDown,
-          theme = _this$context6.theme,
-          isMobile = _this$context6.isMobile;
-      var highlight = theme.highlight,
-          lcdColor = theme.lcdColor;
-
-      var lcdProps = _defineProperty({
-        className: 'keyboard-lcd',
-        style: this.getLCDStyle()
-      }, isMobile ? 'onTouchStart' : 'onMouseDown', lcdMouseDown);
-
-      var markProps = {
-        style: {
-          background: init ? highlight : 'none',
-          color: init ? '#fff' : lcdColor
-        }
-      };
+      var gap = this.context.gap;
       return _react.default.createElement("div", {
         className: "keyboard-header"
       }, _react.default.createElement(KeyboardKey, {
@@ -632,19 +603,19 @@ var KeyboardTitle =
 function (_Component5) {
   _inherits(KeyboardTitle, _Component5);
 
-  function KeyboardTitle(props) {
+  function KeyboardTitle() {
     _classCallCheck(this, KeyboardTitle);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(KeyboardTitle).call(this, props));
+    return _possibleConstructorReturn(this, _getPrototypeOf(KeyboardTitle).apply(this, arguments));
   }
 
   _createClass(KeyboardTitle, [{
     key: "getStyle",
     value: function getStyle() {
-      var _this$context7 = this.context,
-          keyHeight = _this$context7.keyHeight,
-          theme = _this$context7.theme,
-          gap = _this$context7.gap;
+      var _this$context5 = this.context,
+          keyHeight = _this$context5.keyHeight,
+          theme = _this$context5.theme,
+          gap = _this$context5.gap;
       var titleColor = theme.titleColor;
       return {
         height: keyHeight + 'px',
@@ -677,19 +648,16 @@ var KeyboardField =
 function (_Component6) {
   _inherits(KeyboardField, _Component6);
 
-  function KeyboardField(props) {
+  function KeyboardField() {
     _classCallCheck(this, KeyboardField);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(KeyboardField).call(this, props));
+    return _possibleConstructorReturn(this, _getPrototypeOf(KeyboardField).apply(this, arguments));
   }
 
   _createClass(KeyboardField, [{
     key: "getStyle",
     value: function getStyle(field) {
-      var _this$context8 = this.context,
-          keyHeight = _this$context8.keyHeight,
-          theme = _this$context8.theme,
-          gap = _this$context8.gap;
+      var theme = this.context.theme;
       var titleColor = theme.titleColor,
           activeFieldColor = theme.activeFieldColor;
       return {
